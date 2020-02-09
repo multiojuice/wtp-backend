@@ -18,13 +18,10 @@ export default async (req, resp) => {
             data.students.push(id)
           })
     }
-    console.warn(data.students);
-
 
     const result = await collection.update({id: data.id}, data, {upsert: true});
     const ownerResult = await publicSchools.update({id: data.owner}, {'$addToSet': {events: data.id}});
     data.students.forEach(async (element) => {
-        console.warn('HERE')
         const universitiesResult = await students.update({id: element}, {'$addToSet': {events: data.id}});
     });
 

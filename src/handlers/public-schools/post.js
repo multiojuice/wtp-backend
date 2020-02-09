@@ -9,7 +9,5 @@ export default async (req, resp) => {
     data.events = []
     const {result} = await collection.update({id: data.id}, data, {upsert: true});
 
-    console.warn(result)
-
     resp.json({success: true});
 }
