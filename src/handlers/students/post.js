@@ -8,7 +8,6 @@ export default async (req, resp) => {
 
     const data = req.body;
     data.events = []
-    data.id = uuid();
     const result = await collection.update({id: data.id}, data, {upsert: true});
 
     const universitiesResult = await universities.update({id: data.university}, {'$addToSet': {students: data.id}});

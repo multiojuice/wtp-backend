@@ -3,11 +3,11 @@ import mongo from '../../mongo';
 
 export default async (req, resp) => {
     const db = await mongo;
-    const collection = db.collection('public-schools');
+    const collection = db.collection('logins');
 
     const data = req.body;
-    data.events = []
+    data.id = uuid();
     const result = await collection.update({}, data, {upsert: true});
 
-    resp.json({success: true});
+    resp.json({success: data.id});
 }

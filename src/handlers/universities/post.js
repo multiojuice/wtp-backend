@@ -6,7 +6,6 @@ export default async (req, resp) => {
     const collection = db.collection('universities');
 
     const data = req.body;
-    data.id = uuid();
     data.students = []
     const result = await collection.update({name: data.name}, data, {upsert: true});
 
