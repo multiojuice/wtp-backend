@@ -7,5 +7,5 @@ export default async (req, resp) => {
     
     const result = await collection.find(req.query).toArray();
     
-    resp.json(result);
+    resp.json(result[0]);
 }

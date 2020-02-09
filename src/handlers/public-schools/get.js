@@ -7,6 +7,5 @@ export default async (req, resp) => {
 
     const result = await collection.find({}).toArray();
     
-    console.warn(result)
     resp.json(result);
 }
