@@ -10,6 +10,5 @@ const getDb = async () => {
 }
 
 const db = getDb();
-console.warn('HERE', db)
 
 export default db;
