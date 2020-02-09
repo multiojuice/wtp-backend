@@ -9,9 +9,22 @@ export default async (req, resp) => {
 
     const data = req.body;
     data.id = uuid();
+    if (!data.students) data.students = [];
+    if (data.students.length == 0) {
+        const student = await students.find(
+            { tags: { $in: data.tags } }
+          ).toArray();
+          student.forEach(({id}) => {
+            data.students.push(id)
+          })
+    }
+    console.warn(data.students);
+
+
     const result = await collection.update({id: data.id}, data, {upsert: true});
     const ownerResult = await publicSchools.update({id: data.owner}, {'$addToSet': {events: data.id}});
     data.students.forEach(async (element) => {
+        console.warn('HERE')
         const universitiesResult = await students.update({id: element}, {'$addToSet': {events: data.id}});
     });
 
