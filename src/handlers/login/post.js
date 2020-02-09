@@ -7,7 +7,7 @@ export default async (req, resp) => {
 
     const data = req.body;
     data.id = uuid();
-    const result = await collection.update({}, data, {upsert: true});
+    const result = await collection.insert({}, data, {upsert: true});
 
     resp.json({success: data.id});
 }
